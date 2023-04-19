@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.bold}>15o</Text>
+      <Text style={styles.bold}>Ne nous mangez pas</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -20,5 +20,6 @@ const styles = StyleSheet.create({
 
   bold: {
     fontWeight: 'bold',
+    fontSize: 20
   },
 });
