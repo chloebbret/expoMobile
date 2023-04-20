@@ -1,21 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
 import {StyleSheet, Text, View, TextInput, Button, FlatList, Pressable} from 'react-native';
+import {useState} from "react";
+
+function TouchableWithoutFeedback(props) {
+    return null;
+}
 
 export default function App() {
+
+    const [inputValue, setInputValue] = useState('');
+    const [objectifs, setObjectifs] = useState(objectif);
+
+    const onPress = () => {
+        if (inputValue.length >= 5) {
+            setObjectifs([...objectifs, inputValue]) // Adding the value of the input to the array
+            setInputValue('') // Resetting the input value
+        }
+    }
+
+    const deleteObjectif = (objectifToDelete) => {
+        setObjectifs(objectifs.filter(objectif => objectif !== objectifToDelete));
+    };
+
   return (
       <View style={styles.container}>
           <Text style={styles.bold}>Bonjour ! {"\n"}</Text>
           <View style={styles.row}>
-              <TextInput placeholder="Ajouter" style={styles.input}/>
-              {/*<Button title="ADD" color={"powderblue"}></Button>*/}
-              <Pressable style={styles.button}>
+              <TextInput placeholder="Ajouter" style={styles.input} value={inputValue} onChangeText={text => setInputValue(text)}/>
+              <Pressable style={styles.button} onPress={onPress}>
                   <Text>ADD</Text>
               </Pressable>
           </View>
           <FlatList
-              // style={styles.input}
-              data={sampleGoals}
-              renderItem={({item}) => <Text style={styles.liste}>{item}</Text>}
+              data={objectifs}
+              renderItem={({item}) => (
+                  <View style={styles.listeRow}>
+                      <Text style={styles.liste}>{item}</Text>
+                      <Text onPress={() => deleteObjectif(item)}>
+                          ❌
+                      </Text>
+                  </View>
+              )}
               keyExtractor={(item, index) => index.toString()}
           />
           <StatusBar style="auto" />
@@ -54,29 +79,36 @@ const styles = StyleSheet.create({
 
   button: {
       backgroundColor: 'lightblue',
-      borderColor: "lightblue",
       alignItems: "center",
       borderRadius: 5,
       height: 40,
       width: 40,
-      justifyContent: "center"
+      justifyContent: "center",
   },
 
   liste: {
       color: "lightblue",
-      // backgroundColor: "powderblue",
       justifyContent: "center",
       alignItems: "center",
       fontSize: 17,
-      borderRadius: 40,
   },
 
   row: {
       flexDirection: "row",
-  }
+  },
+
+  listeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  delete: {
+    color: 'red',
+    marginLeft: 5,
+  },
 });
 
-const sampleGoals = [
+const objectif = [
     "Faire les courses",
     "Aller à la salle 3 fois par semaine",
     "Perdre 5kg",
