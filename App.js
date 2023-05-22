@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {StyleSheet, Text, View, TextInput, Button, FlatList, Pressable} from 'react-native';
 import {useState} from "react";
+import ButtonInput from "./ButtonInput";
 
 function TouchableWithoutFeedback(props) {
     return null;
@@ -25,12 +26,7 @@ export default function App() {
   return (
       <View style={styles.container}>
           <Text style={styles.bold}>Bonjour ! {"\n"}</Text>
-          <View style={styles.row}>
-              <TextInput placeholder="Ajouter" style={styles.input} value={inputValue} onChangeText={text => setInputValue(text)}/>
-              <Pressable style={styles.button} onPress={onPress}>
-                  <Text>ADD</Text>
-              </Pressable>
-          </View>
+
           <FlatList
               data={objectifs}
               renderItem={({item}) => (
@@ -63,38 +59,16 @@ const styles = StyleSheet.create({
     color: "lightblue",
   },
 
-  input: {
-      height: 50,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-      color: "lightblue",
-      marginBottom: 50,
-      borderColor: "lightblue",
-      width: 230,
-      justifyContent: "center",
-      borderRadius: 10,
-      fontSize: 17,
-  },
-
-  button: {
-      backgroundColor: 'lightblue',
-      alignItems: "center",
-      borderRadius: 5,
-      height: 40,
-      width: 40,
-      justifyContent: "center",
-  },
-
   liste: {
       color: "lightblue",
       justifyContent: "center",
       alignItems: "center",
       fontSize: 17,
+      maxWidth: 300
   },
 
   row: {
-      flexDirection: "row",
+      flexDirection: "row"
   },
 
   listeRow: {
